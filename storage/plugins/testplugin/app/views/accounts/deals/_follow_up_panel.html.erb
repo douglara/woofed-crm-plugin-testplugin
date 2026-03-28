@@ -1,0 +1,47 @@
+<div class="bg-light-palette-p5 border-2 border-light-palette-p3 rounded-md px-4 py-3 mb-4">
+  <div class="flex items-center justify-between mb-3">
+    <h3 class="typography-body-s-lh150 text-dark-gray-palette-p1 font-semibold flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      AI Intelligent Follow Up
+    </h3>
+    <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-medium bg-brand-palette-03 text-white">
+      NEW
+    </span>
+  </div>
+  <% if deal.follow_up_schedules.any? %>
+    <div class="space-y-2">
+      <p class="typography-body-r-lh150 text-dark-gray-palette-p2 mb-3">Scheduled follow-up messages:</p>
+      <% deal.follow_up_schedules.each do |follow_up| %>
+        <div class="flex items-center justify-between p-2 rounded bg-green-50 border border-green-200">
+          <div>
+            <p class="typography-body-900 text-dark-gray-palette-p1"><%= follow_up.send_after_days %> days</p>
+            <p class="typography-text-r-lh150 text-dark-gray-palette-p3 text-sm truncate max-w-[200px]"><%= follow_up.message_template %></p>
+          </div>
+          <div class="text-right">
+            <% if follow_up.next_send_date %>
+              <p class="typography-micro-s-lh150 <%= follow_up.overdue? ? 'text-red-600' : 'text-dark-gray-palette-p3' %>">
+                <%= follow_up.overdue? ? 'Overdue' : 'Next' %>: <%= l(follow_up.next_send_date, format: :short) %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center py-4">
+      <p class="typography-body-r-lh150 text-dark-gray-palette-p3 mb-2">Follow-up system is disabled by default.</p>
+      <p class="typography-text-r-lh150 text-dark-gray-palette-p3 text-sm">Enable intelligent follow-ups to schedule automated messages based on deal activity.</p>
+      <div class="mt-3 p-3 rounded bg-gray-50 border border-dashed border-gray-300">
+        <p class="typography-micro-s-lh150 text-dark-gray-palette-p3">Default intervals (disabled):</p>
+        <div class="flex flex-wrap gap-2 mt-2 justify-center">
+          <span class="px-2 py-1 rounded bg-light-palette-p3 text-xs">1 day</span>
+          <span class="px-2 py-1 rounded bg-light-palette-p3 text-xs">3 days</span>
+          <span class="px-2 py-1 rounded bg-light-palette-p3 text-xs">7 days</span>
+          <span class="px-2 py-1 rounded bg-light-palette-p3 text-xs">14 days</span>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

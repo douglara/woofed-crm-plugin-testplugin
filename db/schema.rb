@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_15_000001) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_29_100001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -619,6 +619,29 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_15_000001) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
+  create_table "testplugin_deal_ai_scores", force: :cascade do |t|
+    t.bigint "deal_id", null: false
+    t.integer "score", default: 0, null: false
+    t.string "score_label", default: "No Score", null: false
+    t.integer "events_count", default: 0
+    t.integer "days_since_last_event", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deal_id"], name: "index_testplugin_deal_ai_scores_on_deal_id"
+  end
+
+  create_table "testplugin_deal_follow_ups", force: :cascade do |t|
+    t.bigint "deal_id", null: false
+    t.integer "send_after_days", default: 1, null: false
+    t.text "message_template", null: false
+    t.boolean "enabled", default: false, null: false
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deal_id"], name: "index_testplugin_deal_follow_ups_on_deal_id"
+    t.index ["enabled"], name: "index_testplugin_deal_follow_ups_on_enabled"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "full_name", default: "", null: false
     t.string "email", default: "", null: false
@@ -674,5 +697,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_15_000001) do
   add_foreign_key "motor_taggable_tags", "motor_tags", column: "tag_id"
   add_foreign_key "stages", "pipelines"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "testplugin_deal_ai_scores", "deals"
+  add_foreign_key "testplugin_deal_follow_ups", "deals"
   add_foreign_key "webpush_subscriptions", "users"
 end

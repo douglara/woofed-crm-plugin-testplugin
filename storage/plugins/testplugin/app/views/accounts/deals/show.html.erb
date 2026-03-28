@@ -1,0 +1,5 @@
+Plugins::FilePatch.define target: "app/views/accounts/deals/show.html.erb" do
+  before_line containing: '<div data-controller="element-expanded">' do
+    "      <div class=\"mb-2\">\n        <%= render 'testplugin/deals/ai_score_panel', deal: @deal %>\n      </div>\n"
+  end
+end

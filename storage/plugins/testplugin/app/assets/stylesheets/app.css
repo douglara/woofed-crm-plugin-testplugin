@@ -1,0 +1,39 @@
+Plugins::FilePatch.define target: "app/assets/stylesheets/application.tailwind.css" do
+  append_to_file do
+    <<~CSS
+
+      /* testplugin: green theme custom colors */
+      /* Override brand palette with green tones */
+      
+      .bg-brand-palette-08 { background-color: #f0fdf4 !important; }
+      .bg-brand-palette-07 { background-color: #dcfce7 !important; }
+      .bg-brand-palette-06 { background-color: #bbf7d0 !important; }
+      .bg-brand-palette-05 { background-color: #86efac !important; }
+      .bg-brand-palette-04 { background-color: #22c55e !important; }
+      .bg-brand-palette-03 { background-color: #16a34a !important; }
+      .bg-brand-palette-02 { background-color: #15803d !important; }
+      .bg-brand-palette-01 { background-color: #14532d !important; }
+
+      .text-brand-palette-08 { color: #f0fdf4 !important; }
+      .text-brand-palette-07 { color: #dcfce7 !important; }
+      .text-brand-palette-06 { color: #bbf7d0 !important; }
+      .text-brand-palette-05 { color: #86efac !important; }
+      .text-brand-palette-04 { color: #22c55e !important; }
+      .text-brand-palette-03 { color: #16a34a !important; }
+      .text-brand-palette-02 { color: #15803d !important; }
+      .text-brand-palette-01 { color: #14532d !important; }
+
+      .border-brand-palette-08 { border-color: #f0fdf4 !important; }
+      .border-brand-palette-07 { border-color: #dcfce7 !important; }
+      .border-brand-palette-06 { border-color: #bbf7d0 !important; }
+      .border-brand-palette-05 { border-color: #86efac !important; }
+      .border-brand-palette-04 { border-color: #22c55e !important; }
+      .border-brand-palette-03 { border-color: #16a34a !important; }
+      .border-brand-palette-02 { border-color: #15803d !important; }
+      .border-brand-palette-01 { border-color: #14532d !important; }
+
+      /* Override main content background */
+      .px-8.md\:p-8.bg-brand-palette-08 { background-color: #f0fdf4 !important; }
+    CSS
+  end
+end

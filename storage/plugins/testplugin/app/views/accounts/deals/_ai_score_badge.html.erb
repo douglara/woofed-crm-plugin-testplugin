@@ -1,0 +1,13 @@
+<% if deal.ai_score > 0 %>
+  <div class="flex items-center gap-1.5 mb-2">
+    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 border border-green-200">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+      </svg>
+      AI Score: <%= deal.ai_score %>%
+    </span>
+    <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-medium bg-brand-palette-03 text-white">
+      NEW
+    </span>
+  </div>
+<% end %>

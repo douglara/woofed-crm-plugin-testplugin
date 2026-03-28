@@ -17,11 +17,6 @@
 #
 #  index_plugins_on_name  (name) UNIQUE
 #
-# Tracks plugins registered in the system.
-# status:
-#   active    - installed locally and enabled
-#   inactive  - disabled (kept in DB but not loaded)
-#   failed    - clone/load failed
 class Plugin < ApplicationRecord
   STATUSES = %w[active inactive failed].freeze
 

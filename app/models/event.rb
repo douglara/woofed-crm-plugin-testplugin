@@ -107,10 +107,6 @@ class Event < ApplicationRecord
     end
   end
 
-  def content_is_blank?(value)
-    value.respond_to?(:body)
-  end
-
   def should_delivery_event_scheduled?
     !done? && (Time.current.in_time_zone > scheduled_at)
   end
@@ -120,7 +116,7 @@ class Event < ApplicationRecord
   end
 
   def scheduled_delivery_event?
-    changed_scheduled_values? && (auto_done == true && scheduled_at.present? && done_at.blank?)
+    changed_scheduled_values? && auto_done == true && scheduled_at.present? && done_at.blank?
   end
 
   def done
